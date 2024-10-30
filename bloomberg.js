@@ -120,18 +120,24 @@ function Three_Commandments(myarr){
 let runResult = {};
 let mydata = {}; // Removed unnecessary declaration within the loop
 
-const codeList = [
-  "DAPP:US","PIMINIA:ID","IVV:US","IUIT:LN","ALORIAA:LX","ALACSRT:LX","TRGBTEQ:LX","JPHLUCA:LX",
-  "BGWTD2U:LX","BGWNBAU:ID","มีเยอะเลย","MERENER:LX","ALGAATU:LX","POTX:US","not found","ARKF:US","EPCWDEI:LX",
-  "JPAGAAU:LX","MSGOPPA:LX","MSAIOPI:LX","2828:HK","GLD:SP","QQQ:US","IWM:US","SMH:LN","UOBCAIJ:SP"
-];
+const codeList = ['2828:HK', 'AAPL:US', 'ABD6:TH', 'ALACSRT:LX',
+                  'ALCRTUA:LX', 'ALGAATU:LX', 'ALORIAA:LX', 'ARKF:US',
+                  'BGFPABA:LN', 'BGWNBAU:ID', 'BGWTD2U:LX', 'BLKCHD2:LX',
+                  'DAPP:US', 'EPCWDEI:LX', 'FGPMAAS:LX', 'GLD:SP', 'GLD:US',
+                  'GOOGL:US', 'IUIT:LN', 'IVSCZEA:LX', 'IVV:US', 'IWM:US',
+                  'JPAGAAU:LX', 'JPHLUCA:LX', 'JUPLUSD:LX', 'MERENER:LX',
+                  'MSAIOPI:LX', 'MSGOPPA:LX', 'NIKADBE:LX', 'PIMINIA:ID',
+                  'POTX:US', 'QQQ:US', 'RCMEGAT:LX', 'SMH:LN', 'SX7PEX:GR','PPGRUIA:ID',
+                  'TRGBTEQ:LX', 'UOBCAIJ:SP', 'VGREMEA:LX', 'WSEEBBH:ID',"VGUSCFI:ID",
+                  "PRI:US","RYAN:US","LSTR:US","GSHD:US","MC:US","SSD:US","FOXF:US",
+                  "TFIN:US","RMV:LN","MORN:US"];
 function main(){
   for (const code of codeList){
     timeSensativeAction(code);
   }
 }
 
-main();
+
 // localStorage.setItem('runResult', JSON.stringify(runResult));
 // localStorage.getItem('runResult');
 function extractrunResult(){
@@ -149,8 +155,24 @@ function extractrunResult(){
       console.log( [key,name, priceMovementIndex, price, prevprice, tradingDate, tradingdayclose] );
     }
 }
-
 function save(){
   const tday = new Date().toJSON().slice(0,10);
+  checkTargetAndResult();
   console.save(runResult, "bloombergdata-"+tday+".json");
 }
+
+
+function checkTargetAndResult(){
+  const o = new Map(Object.entries(runResult));
+  // console.log(o);
+  for (const thiscode of codeList){
+    if (o.get(thiscode)) {
+      // console.log("found " + thiscode);
+    } else {
+      console.log("XXXXX notfound XXXX : " + thiscode)
+    }
+  }
+}
+
+main();
+extractrunResult();
